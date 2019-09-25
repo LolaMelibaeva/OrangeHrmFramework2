@@ -1,5 +1,8 @@
 package com.orangehrm.steps;
 
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,8 +22,7 @@ public class GoogleSearchSteps {
 public void i_navigated_to_the_Google() {
     System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
     driver=new ChromeDriver();
-    driver.get("http://google.com");
-    
+    driver.get("http://google.com");  
     
 }
 
@@ -31,19 +33,20 @@ public void i_type_search_item() {
 
 @And("I click on google search button")
 public void i_click_on_google_search_button() {
-	driver.findElement(By.xpath("//div[@class='FPdoLc VlcLAe']//input[@class='gNO89b']")).click();
+	
+	driver.findElement(By.xpath("//div[@class='FPdoLc VlcLAe']//input[@name='btnK']")).click();
   
 }
 
 @Then("I see search results are displayed")
 public void i_see_search_results_are_displayed() {
-//String text= driver.findElement(By.cssSelector("//div#resultStats")).getText();
-//System.out.println(text);
-//	//if (text.contains("About results")) {
-  System.out.println("The result is displayed");
-	}
+driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+boolean flag= driver.findElement(By.xpath("//div[@id='resultStats']")).isDisplayed();
+Assert.assertTrue(flag);
+ System.out.println("The results are displayed");
+	
 }
-
+}
 
 	
 

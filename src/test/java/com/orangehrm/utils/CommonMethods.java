@@ -1,7 +1,7 @@
 package com.orangehrm.utils;
 
+
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -12,13 +12,10 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.orangehrm.utils.BaseClass;
 
 public class CommonMethods extends  BaseClass {
 
@@ -173,7 +170,7 @@ public class CommonMethods extends  BaseClass {
 		for (WebElement row : rows) {
 			String rowText = row.getText();
 			if (rowText.contains(expectedValue)) {
-				row.click();
+				row.click(); 
 				System.out.println(expectedValue + " is selected");
 				isSelected=true;
 				break;
@@ -276,19 +273,22 @@ public class CommonMethods extends  BaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 	
-	public static String takeScreenshot(String fileName) {
+	public static void waitForInvisibilityOfElementLocated(By locator, int time) {
+	WebDriverWait wait = new WebDriverWait(driver, time);
+    wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+	}
+	
+	public static void waitForInvisibilityOfElementLocated(WebElement element, int time) {
+		WebDriverWait wait = new WebDriverWait(driver, time);
+	    wait.until(ExpectedConditions.invisibilityOf(element));
+		
+	}
+	
+	public static byte[] takeScreenshot() {
 		TakesScreenshot ts = (TakesScreenshot) driver;
-		File scr = ts.getScreenshotAs(OutputType.FILE);
+		byte[] screen = ts.getScreenshotAs(OutputType.BYTES);
 		
-		String dest=System.getProperty("user.dir")+"/target/screenshots/"+fileName+".png";
-		
-		try {
-			FileUtils.copyFile(scr, new File(dest));
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Screenshot is NOT taken");
-		}
-		return dest;
+		return screen;
 	}
 	public static void scrollDown(int pixels) {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
@@ -362,9 +362,10 @@ public class CommonMethods extends  BaseClass {
             System.err.println(expectedValue +" is NOT verified");
         }
         return flag;
-    }
+ 
+	
+	
 
-}
+	   }
 
-
-
+	}

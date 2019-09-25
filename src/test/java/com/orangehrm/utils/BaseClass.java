@@ -1,4 +1,4 @@
-package com.orangehrm.utils;
+ package com.orangehrm.utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class BaseClass {
 
 	public static WebDriver driver;
+	
 	
 	public static void setUp() {
 
@@ -36,6 +37,10 @@ public class BaseClass {
 		driver.manage().window().fullscreen();
 		driver.get(ConfigsReader.getProperty("url"));
 	}
+	public static void tearDown() {
+		driver.quit();
+	}
+	
 
 	
 	}

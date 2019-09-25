@@ -9,9 +9,13 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features="src/test/resources/features/GoogleSearch.feature",
-		glue="com/orangehrm/steps")
-
+		features="src/test/resources/features",
+		glue="com/orangehrm/steps",
+		dryRun=false,
+		monochrome=true,
+		tags= {"@jobtitle"},
+		plugin= {"pretty", "html:target/cucumber-default-reports","json:target/cucumber.json", "rerun:target/rerun.txt"}
+		)
 public class TestRunner {
 
 

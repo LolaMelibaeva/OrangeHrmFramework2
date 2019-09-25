@@ -6,12 +6,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.orangehrm.utils.BaseClass;
+import com.orangehrm.utils.CommonMethods;
 
 public class HomePage extends BaseClass {
 
 
-	@FindBy(xpath="//li[text()='Dashboard']")
-	public WebElement dashboardText;
+
+	
+	@FindBy(xpath="//span[@class='left-menu-title'][contains(text(),'Admin')]")
+	public WebElement adminTab;
+	
+	@FindBy(xpath="//a[@class='collapsible-header waves-effect waves-orange']//span[@class='left-menu-title'][contains(text(),'Job')]")
+	public WebElement jobTab;
+	
+	@FindBy(xpath="//span[contains(text(),'Job Titles')]")
+	public WebElement jobTitlesTab;
 	
 	@FindBy(xpath="//*[@id=\"menu_pim_viewPimModule\"]/a/span[2]")
     public WebElement PIM;
@@ -56,7 +65,50 @@ public class HomePage extends BaseClass {
 	@FindBy(xpath="//i[text()='add']")
 	public WebElement addLocation;
 	
+
+	@FindBy(xpath="//li[@id='menu_admin_Qualifications']/a/span[2]")
+	public WebElement qualification;
 	
+	@FindBy(xpath="//span[text()='Languages']")
+	public WebElement languages;
+
+
+//	@FindBy(xpath="//span[text()='Qualifications']")
+//	public WebElement qualification;
+
+	@FindBy(xpath="//td[@name='listField.name'][3]")
+	public WebElement verifyLoc;
+	
+	
+	@FindBy(xpath="//*[@id='menu_admin_viewSkills']/span[2]")
+	public WebElement skills;
+	
+	@FindBy(xpath="//*[@id='skillDiv']/div/a/i")
+	public WebElement addSkillBtn;
+	
+	@FindBy(xpath="//*[@id='name']")
+	public WebElement nameSkill;
+	
+	@FindBy (xpath="//*[@id='description']")
+	public WebElement descriptionSkill;	
+	
+	@FindBy (xpath="//*[@id='modal1']/form/div[2]/a[1]")
+	public WebElement saveSkillBtn;	
+
+	 @FindBy(id="preloader")
+	 public WebElement loader;
+
+		@FindBy(xpath="//li[text()='Dashboard']")
+		public WebElement dashboardText;
+
+	
+
+	public JobTitlePage jobTitle() {
+		CommonMethods.click(adminTab);
+		CommonMethods.click(jobTab);
+		CommonMethods.click(jobTitlesTab);
+		return new JobTitlePage();
+	}
 	 
 	
 	public HomePage() {

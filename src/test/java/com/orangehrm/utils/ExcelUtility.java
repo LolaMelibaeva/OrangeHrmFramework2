@@ -26,8 +26,8 @@ public class ExcelUtility {
 			 fis=new FileInputStream(xlFilePath);
 			 workbook=new XSSFWorkbook(fis);
 			 sheet=workbook.getSheet(sheetName);
-//			 workbook.close();
-//			  fis.close();
+			
+		
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -35,7 +35,9 @@ public class ExcelUtility {
 		
 		}
 		
+		 
 	}
+	
 	
 	/**
 	 * method will return String of all cell data
